@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wtc433.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wtc433.domain.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="telephone" jdbcType="INTEGER" property="telephone" />
+    <result column="college" jdbcType="VARCHAR" property="college" />
+    <result column="floor" jdbcType="VARCHAR" property="floor" />
+    <result column="dormitory" jdbcType="VARCHAR" property="dormitory" />
+    <result column="likecount" jdbcType="INTEGER" property="likecount" />
+    <result column="iconpath" jdbcType="VARCHAR" property="iconpath" />
+    <result column="earnhow" jdbcType="INTEGER" property="earnhow" />
+    <result column="publishcount" jdbcType="INTEGER" property="publishcount" />
+    <result column="inquirycount" jdbcType="INTEGER" property="inquirycount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, username, password, name, telephone, college, floor, dormitory, likecount, iconpath, 
+    earnhow, publishcount, inquirycount
+  </sql>
+  <select id="selectByExample" parameterType="com.wtc433.domain.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wtc433.domain.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wtc433.domain.User">
+    insert into user (id, username, password, 
+      name, telephone, college, 
+      floor, dormitory, likecount, 
+      iconpath, earnhow, publishcount, 
+      inquirycount)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{telephone,jdbcType=INTEGER}, #{college,jdbcType=VARCHAR}, 
+      #{floor,jdbcType=VARCHAR}, #{dormitory,jdbcType=VARCHAR}, #{likecount,jdbcType=INTEGER}, 
+      #{iconpath,jdbcType=VARCHAR}, #{earnhow,jdbcType=INTEGER}, #{publishcount,jdbcType=INTEGER}, 
+      #{inquirycount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wtc433.domain.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="college != null">
+        college,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
+      <if test="dormitory != null">
+        dormitory,
+      </if>
+      <if test="likecount != null">
+        likecount,
+      </if>
+      <if test="iconpath != null">
+        iconpath,
+      </if>
+      <if test="earnhow != null">
+        earnhow,
+      </if>
+      <if test="publishcount != null">
+        publishcount,
+      </if>
+      <if test="inquirycount != null">
+        inquirycount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=INTEGER},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitory != null">
+        #{dormitory,jdbcType=VARCHAR},
+      </if>
+      <if test="likecount != null">
+        #{likecount,jdbcType=INTEGER},
+      </if>
+      <if test="iconpath != null">
+        #{iconpath,jdbcType=VARCHAR},
+      </if>
+      <if test="earnhow != null">
+        #{earnhow,jdbcType=INTEGER},
+      </if>
+      <if test="publishcount != null">
+        #{publishcount,jdbcType=INTEGER},
+      </if>
+      <if test="inquirycount != null">
+        #{inquirycount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wtc433.domain.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=INTEGER},
+      </if>
+      <if test="record.college != null">
+        college = #{record.college,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floor != null">
+        floor = #{record.floor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dormitory != null">
+        dormitory = #{record.dormitory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.likecount != null">
+        likecount = #{record.likecount,jdbcType=INTEGER},
+      </if>
+      <if test="record.iconpath != null">
+        iconpath = #{record.iconpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.earnhow != null">
+        earnhow = #{record.earnhow,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishcount != null">
+        publishcount = #{record.publishcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.inquirycount != null">
+        inquirycount = #{record.inquirycount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=INTEGER},
+      college = #{record.college,jdbcType=VARCHAR},
+      floor = #{record.floor,jdbcType=VARCHAR},
+      dormitory = #{record.dormitory,jdbcType=VARCHAR},
+      likecount = #{record.likecount,jdbcType=INTEGER},
+      iconpath = #{record.iconpath,jdbcType=VARCHAR},
+      earnhow = #{record.earnhow,jdbcType=INTEGER},
+      publishcount = #{record.publishcount,jdbcType=INTEGER},
+      inquirycount = #{record.inquirycount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wtc433.domain.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=INTEGER},
+      </if>
+      <if test="college != null">
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitory != null">
+        dormitory = #{dormitory,jdbcType=VARCHAR},
+      </if>
+      <if test="likecount != null">
+        likecount = #{likecount,jdbcType=INTEGER},
+      </if>
+      <if test="iconpath != null">
+        iconpath = #{iconpath,jdbcType=VARCHAR},
+      </if>
+      <if test="earnhow != null">
+        earnhow = #{earnhow,jdbcType=INTEGER},
+      </if>
+      <if test="publishcount != null">
+        publishcount = #{publishcount,jdbcType=INTEGER},
+      </if>
+      <if test="inquirycount != null">
+        inquirycount = #{inquirycount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wtc433.domain.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=INTEGER},
+      college = #{college,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      dormitory = #{dormitory,jdbcType=VARCHAR},
+      likecount = #{likecount,jdbcType=INTEGER},
+      iconpath = #{iconpath,jdbcType=VARCHAR},
+      earnhow = #{earnhow,jdbcType=INTEGER},
+      publishcount = #{publishcount,jdbcType=INTEGER},
+      inquirycount = #{inquirycount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <select id="findUserByName" resultMap="BaseResultMap">
+      select * from user where username = #{username}
+  </select>
+
+  <select id="selectAllUser" resultMap="BaseResultMap">
+  select * from User
+  </select>
+  <select id="CountShopPublish"  resultType="java.lang.Integer">
+     SELECT COUNT(*) FROM shop WHERE username = #{username}
+ </select>
+   <select id="CountShopPublishById"  resultType="java.lang.Integer">
+     SELECT COUNT(*) FROM shop WHERE userid = #{userid}
+ </select>
+  
+</mapper>

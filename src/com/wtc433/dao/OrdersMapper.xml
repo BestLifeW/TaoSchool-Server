@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wtc433.dao.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.wtc433.domain.Orders">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="buyer_username" jdbcType="VARCHAR" property="buyerUsername" />
+    <result column="seller_username" jdbcType="VARCHAR" property="sellerUsername" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="time" jdbcType="TIME" property="time" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, shop_id, buyer_username, seller_username, count, time, state
+  </sql>
+  <select id="selectByExample" parameterType="com.wtc433.domain.OrdersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wtc433.domain.OrdersExample">
+    delete from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wtc433.domain.Orders">
+    insert into orders (id, shop_id, buyer_username, 
+      seller_username, count, time, 
+      state)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{buyerUsername,jdbcType=VARCHAR}, 
+      #{sellerUsername,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{time,jdbcType=TIME}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wtc433.domain.Orders">
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="buyerUsername != null">
+        buyer_username,
+      </if>
+      <if test="sellerUsername != null">
+        seller_username,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerUsername != null">
+        #{buyerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerUsername != null">
+        #{sellerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIME},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wtc433.domain.OrdersExample" resultType="java.lang.Long">
+    select count(*) from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update orders
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyerUsername != null">
+        buyer_username = #{record.buyerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerUsername != null">
+        seller_username = #{record.sellerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.count != null">
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIME},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update orders
+    set id = #{record.id,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      buyer_username = #{record.buyerUsername,jdbcType=VARCHAR},
+      seller_username = #{record.sellerUsername,jdbcType=VARCHAR},
+      count = #{record.count,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIME},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wtc433.domain.Orders">
+    update orders
+    <set>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerUsername != null">
+        buyer_username = #{buyerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerUsername != null">
+        seller_username = #{sellerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIME},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wtc433.domain.Orders">
+    update orders
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      buyer_username = #{buyerUsername,jdbcType=VARCHAR},
+      seller_username = #{sellerUsername,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIME},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
