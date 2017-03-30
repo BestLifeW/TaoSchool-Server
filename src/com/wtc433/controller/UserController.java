@@ -90,7 +90,7 @@ public class UserController {
 		HashMap<String, String> msg= new HashMap<>();
 		try {
 			int updateUserById = userService.updateUserById(user);
-			msg.put("msg", updateUserById+" ");
+			msg.put("msg", updateUserById+"");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
