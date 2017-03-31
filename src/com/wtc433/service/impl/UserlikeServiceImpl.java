@@ -79,9 +79,9 @@ public class UserlikeServiceImpl implements UserlikeService {
 		Userlike havaLove = userLikeMapper.isHavaLove(userlike);
 
 		if (havaLove != null) {
-			return "有赞";
+			return "1";
 		} else {
-			return "没赞";
+			return "0";
 		}
 
 	}
