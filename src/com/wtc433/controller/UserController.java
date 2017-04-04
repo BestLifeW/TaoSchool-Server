@@ -191,4 +191,18 @@ public class UserController {
 		
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping("/delUserById")
+	public String delUserById(@PathVariable("userid") int userid) throws Exception{
+		HashMap<String, String> msg = new HashMap<>();
+		try {
+			userService.deleteUserById(userid);
+			msg.put("msg", "用户删除成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			msg.put("msg", "用户删除异常");
+		}
+		return objectMapper.writeValueAsString(msg);
+	}
 }

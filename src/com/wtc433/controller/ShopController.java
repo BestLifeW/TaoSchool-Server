@@ -193,7 +193,21 @@ public class ShopController {
 		inputSteam.close();
 
 	}
-
+	//根据ID删除商品
+	@ResponseBody
+	@RequestMapping(value="/deleteShopById/{shopid}")
+	public String delShopById(@PathVariable("shopid") int shopid) throws Exception{
+		System.out.println("接收要删除的ShopId" + shopid);
+		HashMap<String, String> msg = new HashMap<>();
+		try {
+			shopservice.deleteShopById(shopid);
+			msg.put("msg", "数据删除成功");
+		} catch (Exception e) {
+			msg.put("msg", "数据删除失败");
+		}
+		
+		return objectMapper.writeValueAsString(msg);
+	}
 	
 	
 }

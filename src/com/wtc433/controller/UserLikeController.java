@@ -40,9 +40,9 @@ public class UserLikeController {
 		HashMap<String, String> map = new HashMap<>();
 		boolean addlike = userlikeService.addlike(userlike);
 		if (addlike) {
-			map.put("msg", "点赞成功");
+			map.put("msg", "1"); //返回值 1 为点赞成功
 		} else {
-			map.put("msg", "点赞失败");
+			map.put("msg", ""); //返回值 0 为点赞失败
 		}
 		return objectMapper.writeValueAsString(map);
 	}

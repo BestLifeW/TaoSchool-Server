@@ -49,6 +49,16 @@
 		用户姓名:<input type="text" name="username">
 		<input type="submit" value="提交">
 	</form>
+	
+	<hr>
+	<form
+		action="${pageContext.request.contextPath}/Comment/addComment.do" method="post">
+		商品ID:<input type="text" name="shopid"> 
+		评论信息:<input type="text" name="content">
+		用户姓名:<input type="text" name="username">
+		<input type="submit" value="提交">
+	</form>
+	</span>
 	</span>
 </body>
 </html>

@@ -25,8 +25,9 @@
     
   <!--   <table  tableName="publish" >
     </table> -->
-    <table  tableName="shop" ></table>
- <!--    <table  tableName="user" ></table>
+    <!--<table  tableName="shop" ></table>
+     <table  tableName="user" ></table>
      <table  tableName="orders" ></table> -->
+     <table tableName="comment"></table>
   </context>
 </generatorConfiguration>
