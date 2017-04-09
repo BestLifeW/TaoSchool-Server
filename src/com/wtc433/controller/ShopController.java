@@ -22,6 +22,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wtc433.domain.Shop;
 import com.wtc433.domain.ShopExt;
+import com.wtc433.domain.SubmitDetail;
 import com.wtc433.service.ShopService;
 
 @Controller
@@ -44,7 +46,7 @@ public class ShopController {
 	@RequestMapping("/addShop.do")
 	public String addShop(Shop shop, @RequestParam("file") MultipartFile user_pic, HttpServletRequest request)
 			throws Exception {
-
+		System.out.println("准备商品上传接收到Shop"+shop.toString());
 		HashMap<String, String> msg = new HashMap<>();
 		if (shop.getShopname() != null) {
 			if (!user_pic.isEmpty()) {
@@ -207,6 +209,22 @@ public class ShopController {
 		}
 		
 		return objectMapper.writeValueAsString(msg);
+	}
+	
+	//根据商品ID和用户姓名 来获取提交的订单前的消息
+	@ResponseBody
+	@RequestMapping(value="/getSubmit/{shopid}/{username}")
+	public String getSubmit(@PathVariable("shopid") int shopid,@PathVariable("username") String username) throws Exception{
+		System.out.println("接收到数据,商品id"+shopid+",用户姓名:"+username);
+		HashMap<String, String> map = new HashMap<>();
+		try {
+			SubmitDetail submitDetail = shopservice.findSubmitDetailByShopIdAndUsername(shopid, username);
+			return objectMapper.writeValueAsString(submitDetail);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return null;
 	}
 	
 	
