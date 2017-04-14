@@ -5,13 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sun.swing.internal.plaf.synth.resources.synth_pt_BR;
 import com.wtc433.dao.ShopMapper;
 import com.wtc433.domain.Shop;
 import com.wtc433.domain.ShopExt;
-import com.wtc433.domain.User;
+import com.wtc433.domain.SubmitDetail;
 import com.wtc433.service.ShopService;
-import com.wtc433.service.UserService;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -68,6 +66,13 @@ public class ShopServiceImpl implements ShopService {
 	public ShopExt findShopByShopId(Integer shopid) {
 		ShopExt shop = shopmapper.selectByPrimaryKey(shopid);
 		return  shop;
+	}
+
+	@Override
+	public SubmitDetail findSubmitDetailByShopIdAndUsername(Integer shopid, String username) {
+		// TODO Auto-generated method stub
+		SubmitDetail submitDetail = shopmapper.findSubmitDetailByShopId(shopid, username);
+		return submitDetail;
 	}
 
 }

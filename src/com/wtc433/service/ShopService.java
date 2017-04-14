@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wtc433.domain.Shop;
 import com.wtc433.domain.ShopExt;
+import com.wtc433.domain.SubmitDetail;
 
 public interface ShopService {
 
@@ -26,5 +27,8 @@ public interface ShopService {
 	List<ShopExt> findShopAndUser();
 	
 	ShopExt findShopByShopId(Integer shopid);
+	
+	//根据用户ID和用户名显示要提交的消息
+	SubmitDetail findSubmitDetailByShopIdAndUsername(Integer shopid,String username);
 	
 }

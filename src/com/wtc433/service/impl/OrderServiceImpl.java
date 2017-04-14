@@ -3,6 +3,7 @@ package com.wtc433.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.wtc433.dao.OrdersMapper;
 import com.wtc433.domain.Orders;
@@ -10,6 +11,7 @@ import com.wtc433.service.OrderService;
 /*
  * 订单界面的用户接口
  * */
+@Service
 public class OrderServiceImpl  implements OrderService{
 
 	
