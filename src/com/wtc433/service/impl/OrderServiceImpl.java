@@ -20,8 +20,13 @@ public class OrderServiceImpl  implements OrderService{
 	
 	@Override
 	public void insertOrder(Orders order) {
-		// TODO Auto-generated method stub
-		ordermappers.insert(order);
+		System.out.println(order.toString());
+		try {
+			ordermappers.insert(order);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
@@ -54,6 +59,23 @@ public class OrderServiceImpl  implements OrderService{
 		ordermappers.selectByPrimaryKey(id);
 		
 		return 	ordermappers.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Orders findOrderByShopid(String shopid) {
+		try {
+			Orders order = ordermappers.selectByShopid(shopid);
+			return order;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Orders> findOrderinShopid(List<Integer> shopids) {
+		List<Orders> orderlist = ordermappers.findOrderByshopid(shopids);
+		return orderlist;
 	}
 
 

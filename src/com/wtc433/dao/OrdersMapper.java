@@ -4,6 +4,7 @@ import com.wtc433.domain.Orders;
 import com.wtc433.domain.OrdersExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.logging.log4j.core.config.Order;
 
 public interface OrdersMapper {
     long countByExample(OrdersExample example);
@@ -28,6 +29,7 @@ public interface OrdersMapper {
 
     int updateByPrimaryKey(Orders record);
     
+    Orders selectByShopid(String shopid);
     
-    
+    List<Orders> findOrderByshopid(List<Integer> list);
 }

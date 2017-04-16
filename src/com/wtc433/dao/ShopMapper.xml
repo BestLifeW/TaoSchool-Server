@@ -10,7 +10,7 @@
     <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="oldprice" jdbcType="VARCHAR" property="oldprice" />
-    <result column="shoptime" jdbcType="DATE" property="shoptime" />
+    <result column="shoptime" jdbcType="VARCHAR" property="shoptime" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -107,7 +107,7 @@
       state)
     values (#{id,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{category,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
-      #{username,jdbcType=VARCHAR}, #{oldprice,jdbcType=VARCHAR}, #{shoptime,jdbcType=DATE}, 
+      #{username,jdbcType=VARCHAR}, #{oldprice,jdbcType=VARCHAR}, #{shoptime,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wtc433.domain.Shop">
@@ -170,7 +170,7 @@
         #{oldprice,jdbcType=VARCHAR},
       </if>
       <if test="shoptime != null">
-        #{shoptime,jdbcType=DATE},
+        #{shoptime,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -211,7 +211,7 @@
         oldprice = #{record.oldprice,jdbcType=VARCHAR},
       </if>
       <if test="record.shoptime != null">
-        shoptime = #{record.shoptime,jdbcType=DATE},
+        shoptime = #{record.shoptime,jdbcType=VARCHAR},
       </if>
       <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
@@ -231,7 +231,7 @@
       price = #{record.price,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
       oldprice = #{record.oldprice,jdbcType=VARCHAR},
-      shoptime = #{record.shoptime,jdbcType=DATE},
+      shoptime = #{record.shoptime,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -262,7 +262,7 @@
         oldprice = #{oldprice,jdbcType=VARCHAR},
       </if>
       <if test="shoptime != null">
-        shoptime = #{shoptime,jdbcType=DATE},
+        shoptime = #{shoptime,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
@@ -279,7 +279,7 @@
       price = #{price,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
       oldprice = #{oldprice,jdbcType=VARCHAR},
-      shoptime = #{shoptime,jdbcType=DATE},
+      shoptime = #{shoptime,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -349,7 +349,6 @@
 		FROM 
 			user,shop
 		WHERE shop.`id`=#{id,jdbcType=INTEGER} AND user.`username` = #{username}
-	
 	</select>
 	
 </mapper>
