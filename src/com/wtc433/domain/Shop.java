@@ -19,7 +19,7 @@ public class Shop {
 
 	private String oldprice;
 
-	private Date shoptime;
+	private String shoptime;
 
 	private Integer state;
 
@@ -87,11 +87,11 @@ public class Shop {
 		this.oldprice = oldprice == null ? null : oldprice.trim();
 	}
 
-	public Date getShoptime() {
+	public String getShoptime() {
 		return shoptime;
 	}
 
-	public void setShoptime(Date shoptime) {
+	public void setShoptime(String shoptime) {
 		this.shoptime = shoptime;
 	}
 

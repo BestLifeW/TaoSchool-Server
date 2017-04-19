@@ -3,12 +3,12 @@
 <mapper namespace="com.wtc433.dao.OrdersMapper">
   <resultMap id="BaseResultMap" type="com.wtc433.domain.Orders">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
-    <result column="buyer_username" jdbcType="VARCHAR" property="buyerUsername" />
-    <result column="seller_username" jdbcType="VARCHAR" property="sellerUsername" />
+    <result column="shopid" jdbcType="VARCHAR" property="shopid" />
+    <result column="buyerusername" jdbcType="VARCHAR" property="buyerusername" />
+    <result column="sellerusername" jdbcType="VARCHAR" property="sellerusername" />
     <result column="count" jdbcType="INTEGER" property="count" />
-    <result column="time" jdbcType="TIME" property="time" />
-    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, shop_id, buyer_username, seller_username, count, time, state
+    id, shopid, buyerusername, sellerusername, count, time, state
   </sql>
   <select id="selectByExample" parameterType="com.wtc433.domain.OrdersExample" resultMap="BaseResultMap">
     select
@@ -102,12 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.wtc433.domain.Orders">
-    insert into orders (id, shop_id, buyer_username, 
-      seller_username, count, time, 
+    insert into orders (id, shopid, buyerusername, 
+      sellerusername, count, time, 
       state)
-    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{buyerUsername,jdbcType=VARCHAR}, 
-      #{sellerUsername,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{time,jdbcType=TIME}, 
-      #{state,jdbcType=INTEGER})
+    values (#{id,jdbcType=INTEGER}, #{shopid,jdbcType=VARCHAR}, #{buyerusername,jdbcType=VARCHAR}, 
+      #{sellerusername,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wtc433.domain.Orders">
     insert into orders
@@ -115,14 +115,14 @@
       <if test="id != null">
         id,
       </if>
-      <if test="shopId != null">
-        shop_id,
+      <if test="shopid != null">
+        shopid,
       </if>
-      <if test="buyerUsername != null">
-        buyer_username,
+      <if test="buyerusername != null">
+        buyerusername,
       </if>
-      <if test="sellerUsername != null">
-        seller_username,
+      <if test="sellerusername != null">
+        sellerusername,
       </if>
       <if test="count != null">
         count,
@@ -138,23 +138,23 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="shopId != null">
-        #{shopId,jdbcType=INTEGER},
+      <if test="shopid != null">
+        #{shopid,jdbcType=VARCHAR},
       </if>
-      <if test="buyerUsername != null">
-        #{buyerUsername,jdbcType=VARCHAR},
+      <if test="buyerusername != null">
+        #{buyerusername,jdbcType=VARCHAR},
       </if>
-      <if test="sellerUsername != null">
-        #{sellerUsername,jdbcType=VARCHAR},
+      <if test="sellerusername != null">
+        #{sellerusername,jdbcType=VARCHAR},
       </if>
       <if test="count != null">
         #{count,jdbcType=INTEGER},
       </if>
       <if test="time != null">
-        #{time,jdbcType=TIME},
+        #{time,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
-        #{state,jdbcType=INTEGER},
+        #{state,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -170,23 +170,23 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.shopId != null">
-        shop_id = #{record.shopId,jdbcType=INTEGER},
+      <if test="record.shopid != null">
+        shopid = #{record.shopid,jdbcType=VARCHAR},
       </if>
-      <if test="record.buyerUsername != null">
-        buyer_username = #{record.buyerUsername,jdbcType=VARCHAR},
+      <if test="record.buyerusername != null">
+        buyerusername = #{record.buyerusername,jdbcType=VARCHAR},
       </if>
-      <if test="record.sellerUsername != null">
-        seller_username = #{record.sellerUsername,jdbcType=VARCHAR},
+      <if test="record.sellerusername != null">
+        sellerusername = #{record.sellerusername,jdbcType=VARCHAR},
       </if>
       <if test="record.count != null">
         count = #{record.count,jdbcType=INTEGER},
       </if>
       <if test="record.time != null">
-        time = #{record.time,jdbcType=TIME},
+        time = #{record.time,jdbcType=VARCHAR},
       </if>
       <if test="record.state != null">
-        state = #{record.state,jdbcType=INTEGER},
+        state = #{record.state,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -196,12 +196,12 @@
   <update id="updateByExample" parameterType="map">
     update orders
     set id = #{record.id,jdbcType=INTEGER},
-      shop_id = #{record.shopId,jdbcType=INTEGER},
-      buyer_username = #{record.buyerUsername,jdbcType=VARCHAR},
-      seller_username = #{record.sellerUsername,jdbcType=VARCHAR},
+      shopid = #{record.shopid,jdbcType=VARCHAR},
+      buyerusername = #{record.buyerusername,jdbcType=VARCHAR},
+      sellerusername = #{record.sellerusername,jdbcType=VARCHAR},
       count = #{record.count,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIME},
-      state = #{record.state,jdbcType=INTEGER}
+      time = #{record.time,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,35 +209,50 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wtc433.domain.Orders">
     update orders
     <set>
-      <if test="shopId != null">
-        shop_id = #{shopId,jdbcType=INTEGER},
+      <if test="shopid != null">
+        shopid = #{shopid,jdbcType=VARCHAR},
       </if>
-      <if test="buyerUsername != null">
-        buyer_username = #{buyerUsername,jdbcType=VARCHAR},
+      <if test="buyerusername != null">
+        buyerusername = #{buyerusername,jdbcType=VARCHAR},
       </if>
-      <if test="sellerUsername != null">
-        seller_username = #{sellerUsername,jdbcType=VARCHAR},
+      <if test="sellerusername != null">
+        sellerusername = #{sellerusername,jdbcType=VARCHAR},
       </if>
       <if test="count != null">
         count = #{count,jdbcType=INTEGER},
       </if>
       <if test="time != null">
-        time = #{time,jdbcType=TIME},
+        time = #{time,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
-        state = #{state,jdbcType=INTEGER},
+        state = #{state,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wtc433.domain.Orders">
     update orders
-    set shop_id = #{shopId,jdbcType=INTEGER},
-      buyer_username = #{buyerUsername,jdbcType=VARCHAR},
-      seller_username = #{sellerUsername,jdbcType=VARCHAR},
+    set shopid = #{shopid,jdbcType=VARCHAR},
+      buyerusername = #{buyerusername,jdbcType=VARCHAR},
+      sellerusername = #{sellerusername,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIME},
-      state = #{state,jdbcType=INTEGER}
+      time = #{time,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByShopid" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * from orders where shopid = #{shopid}
+  </select>
+  
+  <select id="findOrderByshopid" resultMap="BaseResultMap">
+  	select * from orders where shopid  
+    <if test="idsList != null and idsList.size()>0">  
+        and shopid in  
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">  
+                #{item}  
+            </foreach>  
+    </if>  
+  </select>
+  
 </mapper>

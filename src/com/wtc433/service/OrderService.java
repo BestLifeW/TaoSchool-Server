@@ -23,5 +23,12 @@ public interface OrderService {
 	//查询ID查询
 	Orders findOrderById(Integer id);
 	
-
+	
+	//查询 数据 用 商品id
+	Orders findOrderByShopid(String shopid);
+	
+	
+	//查询 
+	List<Orders> findOrderinShopid(List<Integer> shopids);
+	
 }

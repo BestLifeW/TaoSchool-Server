@@ -1,21 +1,19 @@
 package com.wtc433.domain;
 
-import java.util.Date;
-
 public class Orders {
     private Integer id;
 
-    private Integer shopId;
+    private String shopid;
 
-    private String buyerUsername;
+    private String buyerusername;
 
-    private String sellerUsername;
+    private String sellerusername;
 
     private Integer count;
 
-    private Date time;
+    private String time;
 
-    private Integer state;
+    private String state;
 
     public Integer getId() {
         return id;
@@ -25,28 +23,28 @@ public class Orders {
         this.id = id;
     }
 
-    public Integer getShopId() {
-        return shopId;
+    public String getShopid() {
+        return shopid;
     }
 
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
+    public void setShopid(String shopid) {
+        this.shopid = shopid == null ? null : shopid.trim();
     }
 
-    public String getBuyerUsername() {
-        return buyerUsername;
+    public String getBuyerusername() {
+        return buyerusername;
     }
 
-    public void setBuyerUsername(String buyerUsername) {
-        this.buyerUsername = buyerUsername == null ? null : buyerUsername.trim();
+    public void setBuyerusername(String buyerusername) {
+        this.buyerusername = buyerusername == null ? null : buyerusername.trim();
     }
 
-    public String getSellerUsername() {
-        return sellerUsername;
+    public String getSellerusername() {
+        return sellerusername;
     }
 
-    public void setSellerUsername(String sellerUsername) {
-        this.sellerUsername = sellerUsername == null ? null : sellerUsername.trim();
+    public void setSellerusername(String sellerusername) {
+        this.sellerusername = sellerusername == null ? null : sellerusername.trim();
     }
 
     public Integer getCount() {
@@ -57,19 +55,26 @@ public class Orders {
         this.count = count;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setTime(String time) {
+        this.time = time == null ? null : time.trim();
     }
 
-    public Integer getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", shopid=" + shopid + ", buyerusername=" + buyerusername + ", sellerusername="
+				+ sellerusername + ", count=" + count + ", time=" + time + ", state=" + state + "]";
+	}
+
 }
