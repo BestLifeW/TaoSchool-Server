@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.wtc433.dao.OrdersMapper;
 import com.wtc433.domain.Orders;
+import com.wtc433.domain.OrdersExt;
 import com.wtc433.service.OrderService;
 /*
  * 订单界面的用户接口
@@ -76,6 +77,13 @@ public class OrderServiceImpl  implements OrderService{
 	public List<Orders> findOrderinShopid(List<Integer> shopids) {
 		List<Orders> orderlist = ordermappers.findOrderByshopid(shopids);
 		return orderlist;
+	}
+
+	@Override
+	public List<OrdersExt> findOrderByUsername(String username) {
+		List<OrdersExt> username2 = ordermappers.findOrderByUsername(username);
+		
+		return username2;
 	}
 
 

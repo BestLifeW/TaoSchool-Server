@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wtc433.domain.Orders;
+import com.wtc433.domain.OrdersExt;
 import com.wtc433.service.CommentService;
 import com.wtc433.service.OrderService;
 
@@ -70,4 +71,26 @@ public class OrderController {
 			List<Orders> findOrderByShopid = orderService.findOrderinShopid(shopid);
 		return objectMapper.writeValueAsString(findOrderByShopid);
 	}
+	
+	/*select shop.id as shopid,shop.price
+		,shop.shopname
+        ,shop.state as shopstate
+        ,shop.username
+        ,orders.shopid,
+        orders.id as orderis,
+        orders.buyerusername,
+        orders.sellerusername,
+        orders.state as ordersstate
+ from shop,orders
+ where shop.id = orders.shopid
+        */
+	@RequestMapping("/getOrdersByUsername/{username}")
+	@ResponseBody
+	public String getOrderByUsername(@PathVariable("username") String username) throws Exception{
+		List<OrdersExt> orderByUsername = orderService.findOrderByUsername(username);
+		
+		
+		return objectMapper.writeValueAsString(orderByUsername);
+	}
+	
 }

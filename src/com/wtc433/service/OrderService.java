@@ -3,6 +3,7 @@ package com.wtc433.service;
 import java.util.List;
 
 import com.wtc433.domain.Orders;
+import com.wtc433.domain.OrdersExt;
 
 
 public interface OrderService {
@@ -31,4 +32,5 @@ public interface OrderService {
 	//查询 
 	List<Orders> findOrderinShopid(List<Integer> shopids);
 	
+	List<OrdersExt> findOrderByUsername (String username);
 }
