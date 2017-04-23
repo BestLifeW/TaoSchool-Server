@@ -72,25 +72,29 @@ public class OrderController {
 		return objectMapper.writeValueAsString(findOrderByShopid);
 	}
 	
-	/*select shop.id as shopid,shop.price
-		,shop.shopname
-        ,shop.state as shopstate
-        ,shop.username
-        ,orders.shopid,
-        orders.id as orderis,
-        orders.buyerusername,
-        orders.sellerusername,
-        orders.state as ordersstate
- from shop,orders
- where shop.id = orders.shopid
-        */
 	@RequestMapping("/getOrdersByUsername/{username}")
 	@ResponseBody
 	public String getOrderByUsername(@PathVariable("username") String username) throws Exception{
 		List<OrdersExt> orderByUsername = orderService.findOrderByUsername(username);
-		
-		
 		return objectMapper.writeValueAsString(orderByUsername);
 	}
 	
+	@RequestMapping("/updateOrderById.do")
+	@ResponseBody
+	public String setOrderById(String id,String state) throws JsonGenerationException, JsonMappingException, IOException{
+		int orderid = Integer.parseInt(id);
+	
+		HashMap<String, String> msg =new HashMap<>();
+		try {
+			orderService.updateOrderById(orderid,state);
+			msg.put("msg", "修改成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			msg.put("msg", "修改失败");
+		}
+		
+		return objectMapper.writeValueAsString(msg);
+		
+		
+	}
 }

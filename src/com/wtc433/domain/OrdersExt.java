@@ -1,17 +1,48 @@
 package com.wtc433.domain;
 
 public class OrdersExt {
-	/*select shop.id as shopid,shop.price
+	/* select shop.id as shopid,shop.price,
+		user.iconpath,
+        user.telephone,
+        user.college,
+        user.dormitory,
+        user.floor
 		,shop.shopname
         ,shop.state as shopstate
         ,shop.username,
         orders.id as orderid,
         orders.buyerusername,
         orders.sellerusername,
-        orders.state as ordersstate
- 	 from shop,orders
-	 where shop.id = orders.shopid  and orders.sellerusername = #{username}
+        orders.time,
+        orders.state as ordersstate,
+        shop.picture
+ from shop,orders,user
+ where shop.id = orders.shopid and shop.username = user.username 
 */	private int shopid;
+	public String getCollege() {
+	return college;
+}
+public void setCollege(String college) {
+	this.college = college;
+}
+public String getDormitory() {
+	return dormitory;
+}
+public void setDormitory(String dormitory) {
+	this.dormitory = dormitory;
+}
+public String getFloor() {
+	return floor;
+}
+public void setFloor(String floor) {
+	this.floor = floor;
+}
+public String getTelephone() {
+	return telephone;
+}
+public void setTelephone(String telephone) {
+	this.telephone = telephone;
+}
 	private String price;
 	private String shopstate;
 	private String username;
@@ -22,6 +53,17 @@ public class OrdersExt {
 	private String iconpath;
 	private String picture;
 	private String time;
+	private String college;
+	private String dormitory;
+	private String floor;
+	private String telephone;
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getTime() {
 		return time;
 	}

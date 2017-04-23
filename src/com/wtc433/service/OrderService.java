@@ -16,7 +16,8 @@ public interface OrderService {
 	
 	
 	//改
-	void updateOrderById(Orders order);
+	void updateOrderById(Integer id ,String state);
+	
 	
 	//查询所有
 	List<Orders> findAll();
