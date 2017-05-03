@@ -17,45 +17,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wtc433.domain.Orders;
+import com.wtc433.domain.OrdersExt;
 import com.wtc433.service.CommentService;
 import com.wtc433.service.OrderService;
 
 @RequestMapping("/Order")
 @Controller
 public class OrderController {
-		
+
 	ObjectMapper objectMapper = new ObjectMapper();
-	
+
 	@Autowired
 	private OrderService orderService;
-	
-	
+
 	@RequestMapping("/addOrder.do")
 	@ResponseBody
-	public String addOrder(Orders orders) throws JsonGenerationException, JsonMappingException, IOException{
+	public String addOrder(Orders orders) throws JsonGenerationException, JsonMappingException, IOException {
 		HashMap<String, String> map = new HashMap<>();
-		System.out.println("收到订单预定信息"+orders.toString());
+		System.out.println("收到订单预定信息" + orders.toString());
 		try {
 			orderService.insertOrder(orders);
 			map.put("msg", "插入成功");
 		} catch (Exception e) {
-			
+
 			map.put("msg", "插入失败");
 		}
-		
+
 		return objectMapper.writeValueAsString(map);
 	}
-	
+
 	@RequestMapping("/getOrderByShopid/{shopid}")
 	@ResponseBody
-	public String getOrderByShopid(@PathVariable("shopid") String shopid) throws JsonGenerationException, JsonMappingException, IOException{
+	public String getOrderByShopid(@PathVariable("shopid") String shopid)
+			throws JsonGenerationException, JsonMappingException, IOException {
 		HashMap<String, String> map = new HashMap<>();
-		
-		System.out.println("收到商品id"+shopid);
+
+		System.out.println("收到商品id" + shopid);
 		try {
 			Orders findOrderByShopid = orderService.findOrderByShopid(shopid);
 			System.out.println(findOrderByShopid);
-			if (findOrderByShopid!=null) {
+			if (findOrderByShopid != null) {
 				map.put("msg", "已经拍下");
 			}
 		} catch (Exception e) {
@@ -63,11 +64,45 @@ public class OrderController {
 		}
 		return objectMapper.writeValueAsString(map);
 	}
-	
+
 	@RequestMapping("/getOrdersInShopid.do")
 	@ResponseBody
-	public String getOrdersInShopid(List<Integer> shopid) throws JsonGenerationException, JsonMappingException, IOException{
-			List<Orders> findOrderByShopid = orderService.findOrderinShopid(shopid);
+	public String getOrdersInShopid(List<Integer> shopid)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		List<Orders> findOrderByShopid = orderService.findOrderinShopid(shopid);
 		return objectMapper.writeValueAsString(findOrderByShopid);
+	}
+
+	@RequestMapping("/getOrdersByUsername/{username}") // 根据卖家获得
+	@ResponseBody
+	public String getOrderByUsername(@PathVariable("username") String username) throws Exception {
+		List<OrdersExt> orderByUsername = orderService.findOrderByUsername(username);
+		return objectMapper.writeValueAsString(orderByUsername);
+	}
+
+	@RequestMapping("/updateOrderById.do")
+	@ResponseBody
+	public String setOrderById(String id, String state)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		int orderid = Integer.parseInt(id);
+
+		HashMap<String, String> msg = new HashMap<>();
+		try {
+			orderService.updateOrderById(orderid, state);
+			msg.put("msg", "修改成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			msg.put("msg", "修改失败");
+		}
+
+		return objectMapper.writeValueAsString(msg);
+	}
+
+	@RequestMapping("/getOrdersBybuyer/{username}") // 根据买家
+	@ResponseBody
+	public String getOrderBybuyer(@PathVariable("username") String username)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		List<OrdersExt> buybuyer = orderService.findOrderBuybuyer(username);
+		return objectMapper.writeValueAsString(buybuyer);
 	}
 }

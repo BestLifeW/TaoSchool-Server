@@ -2,6 +2,8 @@ package com.wtc433.dao;
 
 import com.wtc433.domain.Orders;
 import com.wtc433.domain.OrdersExample;
+import com.wtc433.domain.OrdersExt;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.logging.log4j.core.config.Order;
@@ -27,9 +29,13 @@ public interface OrdersMapper {
 
     int updateByPrimaryKeySelective(Orders record);
 
-    int updateByPrimaryKey(Orders record);
+    int updateByPrimaryKey(@Param("id")Integer id, @Param("state")String state);
     
     Orders selectByShopid(String shopid);
     
     List<Orders> findOrderByshopid(List<Integer> list);
+    
+    List<OrdersExt> findOrderByUsername(String username);
+    
+    List<OrdersExt> findOrderBuybuyer(String username);
 }

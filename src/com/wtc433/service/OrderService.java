@@ -3,6 +3,7 @@ package com.wtc433.service;
 import java.util.List;
 
 import com.wtc433.domain.Orders;
+import com.wtc433.domain.OrdersExt;
 
 
 public interface OrderService {
@@ -15,7 +16,8 @@ public interface OrderService {
 	
 	
 	//改
-	void updateOrderById(Orders order);
+	void updateOrderById(Integer id ,String state);
+	
 	
 	//查询所有
 	List<Orders> findAll();
@@ -31,4 +33,7 @@ public interface OrderService {
 	//查询 
 	List<Orders> findOrderinShopid(List<Integer> shopids);
 	
+	List<OrdersExt> findOrderByUsername (String username);
+	
+	List<OrdersExt> findOrderBuybuyer (String username);
 }

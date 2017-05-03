@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.corba.se.spi.orbutil.fsm.State;
 import com.wtc433.dao.OrdersMapper;
 import com.wtc433.domain.Orders;
+import com.wtc433.domain.OrdersExt;
 import com.wtc433.service.OrderService;
 /*
  * 订单界面的用户接口
@@ -38,10 +40,10 @@ public class OrderServiceImpl  implements OrderService{
 	}
 
 	@Override
-	public void updateOrderById(Orders orders) {
+	public void updateOrderById(Integer id ,String state) {
 		// TODO Auto-generated method stub
-		if (orders!=null) {
-			ordermappers.updateByPrimaryKey(orders);
+		if (id!=null) {
+			ordermappers.updateByPrimaryKey(id,state);
 		}
 	}
 
@@ -76,6 +78,20 @@ public class OrderServiceImpl  implements OrderService{
 	public List<Orders> findOrderinShopid(List<Integer> shopids) {
 		List<Orders> orderlist = ordermappers.findOrderByshopid(shopids);
 		return orderlist;
+	}
+
+	@Override
+	public List<OrdersExt> findOrderByUsername(String username) {
+		List<OrdersExt> username2 = ordermappers.findOrderByUsername(username);
+		
+		return username2;
+	}
+
+	@Override
+	public List<OrdersExt> findOrderBuybuyer(String username) {
+	
+		List<OrdersExt> buybuyer = ordermappers.findOrderBuybuyer(username);
+		return buybuyer;
 	}
 
 
