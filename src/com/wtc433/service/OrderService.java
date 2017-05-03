@@ -31,9 +31,12 @@ public interface OrderService {
 	
 	
 	//查询 
-	List<Orders> findOrderinShopid(List<Integer> shopids);
 	
 	List<OrdersExt> findOrderByUsername (String username);
-	
+
 	List<OrdersExt> findOrderBuybuyer (String username);
+	List<OrdersExt> findOrderByshopid (Integer shopid);
+
+	OrdersExt findOrdersByshopid(String shopid);
+	
 }

@@ -1,12 +1,9 @@
 package com.wtc433.controller;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.logging.log4j.core.config.Order;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wtc433.domain.Orders;
 import com.wtc433.domain.OrdersExt;
-import com.wtc433.service.CommentService;
 import com.wtc433.service.OrderService;
 
 @RequestMapping("/Order")
@@ -65,13 +61,6 @@ public class OrderController {
 		return objectMapper.writeValueAsString(map);
 	}
 
-	@RequestMapping("/getOrdersInShopid.do")
-	@ResponseBody
-	public String getOrdersInShopid(List<Integer> shopid)
-			throws JsonGenerationException, JsonMappingException, IOException {
-		List<Orders> findOrderByShopid = orderService.findOrderinShopid(shopid);
-		return objectMapper.writeValueAsString(findOrderByShopid);
-	}
 
 	@RequestMapping("/getOrdersByUsername/{username}") // 根据卖家获得
 	@ResponseBody
@@ -104,5 +93,28 @@ public class OrderController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		List<OrdersExt> buybuyer = orderService.findOrderBuybuyer(username);
 		return objectMapper.writeValueAsString(buybuyer);
+	}
+	
+	@RequestMapping("/getOrdersByShopid/{shopid}")
+	@ResponseBody
+	public String getOrdersInShopid(@PathVariable("shopid")  String shopid)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		OrdersExt findOrderByShopid = orderService.findOrdersByshopid(shopid);
+		return objectMapper.writeValueAsString(findOrderByShopid);
+	}
+		
+	
+	@RequestMapping("/delOrderById/{orderid}")
+	@ResponseBody
+	public String delOrderById(@PathVariable("orderid") Integer orderid) throws Exception{
+		System.out.println("要删除的id:"+orderid);
+		HashMap<String, String> msg = new HashMap<>();
+		try {
+			orderService.findOrderById(orderid);
+			msg.put("msg", "删除成功");
+		} catch (Exception e) {
+			msg.put("msg", "删除失败");
+		}
+		return objectMapper.writeValueAsString(msg);
 	}
 }

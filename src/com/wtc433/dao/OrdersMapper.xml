@@ -299,4 +299,26 @@
  	where shop.id = orders.shopid and shop.username = user.username and orders.buyerusername=#{username}
   </select>
   
+    <select id="findOrdersByshopid" parameterType="java.lang.String"  resultType="com.wtc433.domain.OrdersExt">
+  	select shop.id as shopid,shop.price,
+  		user.name,
+		user.iconpath,
+        user.telephone,
+        user.college,
+        user.dormitory,
+        user.floor
+		,shop.shopname
+        ,shop.state as shopstate
+        ,shop.username,
+        orders.id as orderid,
+        orders.buyerusername,
+        orders.sellerusername,
+        orders.time,
+        orders.state as ordersstate,
+        shop.picture
+ 	from shop,orders,user
+ 	where shop.id = orders.shopid and shop.username = user.username and orders.`shopid`=#{shopid}
+  </select>
+  
+  
 </mapper>

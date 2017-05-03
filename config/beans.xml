@@ -19,7 +19,7 @@
 	<!-- 第一步：配置数据源 -->
 	 <!-- <context:property-placeholder location="classpath:jdbc.properties" /> -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"   destroy-method="close">
-		<property name="url" value="jdbc:mysql://123.56.223.17:3306/taoschool?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/taoschool?useUnicode=true&amp;characterEncoding=UTF-8"></property>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="123"></property>
