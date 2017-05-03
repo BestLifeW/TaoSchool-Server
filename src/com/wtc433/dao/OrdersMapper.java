@@ -36,4 +36,6 @@ public interface OrdersMapper {
     List<Orders> findOrderByshopid(List<Integer> list);
     
     List<OrdersExt> findOrderByUsername(String username);
+    
+    List<OrdersExt> findOrderBuybuyer(String username);
 }

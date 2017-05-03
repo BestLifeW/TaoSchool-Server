@@ -34,4 +34,6 @@ public interface OrderService {
 	List<Orders> findOrderinShopid(List<Integer> shopids);
 	
 	List<OrdersExt> findOrderByUsername (String username);
+	
+	List<OrdersExt> findOrderBuybuyer (String username);
 }

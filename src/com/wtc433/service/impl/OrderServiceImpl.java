@@ -87,5 +87,12 @@ public class OrderServiceImpl  implements OrderService{
 		return username2;
 	}
 
+	@Override
+	public List<OrdersExt> findOrderBuybuyer(String username) {
+	
+		List<OrdersExt> buybuyer = ordermappers.findOrderBuybuyer(username);
+		return buybuyer;
+	}
+
 
 }
