@@ -20,6 +20,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,7 +109,7 @@ public class ShopController {
 	@RequestMapping("/getShopByUserName/{username}")
 	public String getShopByUserName(@PathVariable("username") String username) throws Exception {
 		System.out.println("接收到"+username);
-		List<Shop> shops = shopservice.findShopByUserName(username);
+		List<ShopExt> shops = shopservice.findShopByUserName(username);
 		return objectMapper.writeValueAsString(shops);
 
 	}
@@ -153,5 +155,19 @@ public class ShopController {
 		return null;
 	}
 	
+	//根据id删除商品
+	@ResponseBody
+	@RequestMapping(value="/delShopBuId/{shopid}")
+	public String delShopByid(@PathVariable("shopid") int shopid) throws Exception{
+		System.out.println("接收删除的数据,商品id"+shopid);
+		HashMap<String, String> map = new HashMap<>();
+		try {
+			shopservice.deleteShopById(shopid);
+			map.put("msg", "删除成功");
+		} catch (Exception e) {
+			map.put("msg", "删除失败");
+		}
+		return objectMapper.writeValueAsString(map);
+	}
 	
 }

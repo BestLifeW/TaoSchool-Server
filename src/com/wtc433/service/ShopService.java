@@ -22,7 +22,7 @@ public interface ShopService {
 	List<Shop> findAll();
 	
 	//查询ID查询
-	List<Shop> findShopByUserName(String username);
+	List<ShopExt> findShopByUserName(String username);
 	
 	List<ShopExt> findShopAndUser();
 	

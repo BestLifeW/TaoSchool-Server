@@ -17,15 +17,40 @@
 		<context:component-scan base-package="com.wtc433"></context:component-scan>
 		
 	<!-- 第一步：配置数据源 -->
-	<context:property-placeholder location="classpath:jdbc.properties" />
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="jdbcUrl" value="${jdbc.url}"></property>
-		<property name="driverClass" value="${jdbc.driver}"></property>
-		<property name="user" value="${jdbc.username}"></property>
-		<property name="password" value="${jdbc.password}"></property>
-
+	 <!-- <context:property-placeholder location="classpath:jdbc.properties" /> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"   destroy-method="close">
+		<property name="url" value="jdbc:mysql://123.56.223.17:3306/taoschool?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123"></property>
+			<!-- 初始化连接大小 -->
+		<property name="initialSize" value="0"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="20"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="20"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="1"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="60000"></property>
+		<property name="validationQuery" value="select current_date()" />  
+        <property name="testOnBorrow" value="false" />  
+        <property name="testOnReturn" value="false" />  
+        <property name="testWhileIdle" value="true" />  
+        <property name="removeAbandoned" value="true" />  
+        <property name="removeAbandonedTimeout" value="90" />  
+        <property name="logAbandoned" value="false" />  
+        <property name= "timeBetweenEvictionRunsMillis" value="30000" />    
+        <property name= "numTestsPerEvictionRun" value="30" />    
+        <property name="minEvictableIdleTimeMillis" value="1800000" />
 	</bean>
-
+<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"          
+        destroy-method="close">          
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />         
+    <property name="url" value="jdbc:mysql://localhost:3309/sampledb" />         
+    <property name="username" value="root" />         
+    <property name="password" value="1234" />         
+</bean>     -->
 	<!-- 第二步：创建sqlSessionFactory。生产sqlSession -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<property name="dataSource" ref="dataSource"></property>

@@ -333,6 +333,27 @@
 		WHERE
 		user.username = shop.username order by id desc
 	</select>
+	<select id="findShopAndUserByUsername" resultType="com.wtc433.domain.ShopExt">
+		SELECT
+		user.`name`,
+		user.`username`,
+		user.`college`,
+		user.`iconpath`,
+		shop.`id`,
+		shop.`shopname`,
+		shop.`price`,
+		shop.`picture`,
+		shop.`description`,
+		shop.`shoptime`,
+		shop.`state`
+		FROM
+		shop,
+		user
+		WHERE
+		user.username = shop.username and shop.username = #{username}
+	</select>
+	
+	
 	<select id="findSubmitDetailByShopId" resultType="com.wtc433.domain.SubmitDetail">
 		SELECT 
 			user.`id`,

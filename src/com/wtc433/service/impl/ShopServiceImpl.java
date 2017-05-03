@@ -51,9 +51,9 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public List<Shop> findShopByUserName(String username) {
+	public List<ShopExt> findShopByUserName(String username) {
 		// TODO Auto-generated method stub
-		return shopmapper.findShopByName(username);
+		return shopmapper.findShopAndUserByUsername(username);
 	}
 
 	@Override
