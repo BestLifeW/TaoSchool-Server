@@ -30,5 +30,9 @@ public interface ShopService {
 	
 	//根据用户ID和用户名显示要提交的消息
 	SubmitDetail findSubmitDetailByShopIdAndUsername(Integer shopid,String username);
+
+	List<ShopExt> findShopByCategory(String category);
+
+
 	
 }

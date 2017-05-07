@@ -6,7 +6,7 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="telephone" jdbcType="INTEGER" property="telephone" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
     <result column="college" jdbcType="VARCHAR" property="college" />
     <result column="floor" jdbcType="VARCHAR" property="floor" />
     <result column="dormitory" jdbcType="VARCHAR" property="dormitory" />
@@ -115,7 +115,7 @@
       iconpath, earnhow, publishcount, 
       inquirycount)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{telephone,jdbcType=INTEGER}, #{college,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, 
       #{floor,jdbcType=VARCHAR}, #{dormitory,jdbcType=VARCHAR}, #{likecount,jdbcType=INTEGER}, 
       #{iconpath,jdbcType=VARCHAR}, #{earnhow,jdbcType=INTEGER}, #{publishcount,jdbcType=INTEGER}, 
       #{inquirycount,jdbcType=INTEGER})
@@ -177,7 +177,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="telephone != null">
-        #{telephone,jdbcType=INTEGER},
+        #{telephone,jdbcType=VARCHAR},
       </if>
       <if test="college != null">
         #{college,jdbcType=VARCHAR},
@@ -227,7 +227,7 @@
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.telephone != null">
-        telephone = #{record.telephone,jdbcType=INTEGER},
+        telephone = #{record.telephone,jdbcType=VARCHAR},
       </if>
       <if test="record.college != null">
         college = #{record.college,jdbcType=VARCHAR},
@@ -264,7 +264,7 @@
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      telephone = #{record.telephone,jdbcType=INTEGER},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
       college = #{record.college,jdbcType=VARCHAR},
       floor = #{record.floor,jdbcType=VARCHAR},
       dormitory = #{record.dormitory,jdbcType=VARCHAR},
@@ -290,7 +290,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="telephone != null">
-        telephone = #{telephone,jdbcType=INTEGER},
+        telephone = #{telephone,jdbcType=VARCHAR},
       </if>
       <if test="college != null">
         college = #{college,jdbcType=VARCHAR},
@@ -324,7 +324,7 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      telephone = #{telephone,jdbcType=INTEGER},
+      telephone = #{telephone,jdbcType=VARCHAR},
       college = #{college,jdbcType=VARCHAR},
       floor = #{floor,jdbcType=VARCHAR},
       dormitory = #{dormitory,jdbcType=VARCHAR},

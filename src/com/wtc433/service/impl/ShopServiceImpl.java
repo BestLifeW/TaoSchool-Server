@@ -75,4 +75,11 @@ public class ShopServiceImpl implements ShopService {
 		return submitDetail;
 	}
 
+	@Override
+	public List<ShopExt> findShopByCategory(String category) {
+		System.out.println(category);
+		List<ShopExt> shops = shopmapper.findShopByCategory(category);
+		return shops;
+	}
+
 }

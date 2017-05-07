@@ -7,7 +7,7 @@ public class ShopExt extends Shop {
 	private String iconpath;
 	private String name;
 	private String description;
-	private Integer telephone;
+	private String telephone;
 	private String floor;
 	private String dormitory;
 	private Integer likecount;
@@ -44,10 +44,10 @@ public class ShopExt extends Shop {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Integer getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
-	public void setTelephone(Integer telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 	public String getFloor() {

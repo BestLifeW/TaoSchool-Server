@@ -69,8 +69,6 @@ public class UserController {
 	@RequestMapping("/update.do")
 	public String updateUserPic(User user,MultipartFile pic) throws Exception{
 		
-		
-		
 		HashMap<String, String> msg = new HashMap<>();
 		if (user.getId()!=null) {
 			userService.updateUserById(user);

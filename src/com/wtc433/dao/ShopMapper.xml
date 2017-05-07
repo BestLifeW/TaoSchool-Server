@@ -371,5 +371,23 @@
 			user,shop
 		WHERE shop.`id`=#{id,jdbcType=INTEGER} AND user.`username` = #{username}
 	</select>
-	
+	<select id="findShopByCategory" parameterType="java.lang.String" resultType="com.wtc433.domain.ShopExt">
+		SELECT
+		user.`name`,
+		user.`username`,
+		user.`college`,
+		user.`iconpath`,
+		shop.`id`,
+		shop.`shopname`,
+		shop.`price`,
+		shop.`picture`,
+		shop.`description`,
+		shop.`shoptime`,
+		shop.`state`
+		FROM
+		shop,
+		user
+		WHERE
+		user.username = shop.username and shop.category = #{category}
+	</select>
 </mapper>

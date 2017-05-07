@@ -298,7 +298,6 @@
  	from shop,orders,user
  	where shop.id = orders.shopid and shop.username = user.username and orders.buyerusername=#{username}
   </select>
-  
     <select id="findOrdersByshopid" parameterType="java.lang.String"  resultType="com.wtc433.domain.OrdersExt">
   	select shop.id as shopid,shop.price,
   		user.name,

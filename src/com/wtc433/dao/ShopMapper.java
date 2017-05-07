@@ -41,6 +41,8 @@ public interface ShopMapper {
     SubmitDetail findSubmitDetailByShopId(@Param(value="id") Integer id,@Param(value="username") String username);
     
     List<ShopExt> findShopAndUserByUsername(@Param(value="username") String username);
+
+	List<ShopExt> findShopByCategory(String category);
     
     
 }
