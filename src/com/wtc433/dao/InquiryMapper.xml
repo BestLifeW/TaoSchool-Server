@@ -7,6 +7,8 @@
     <result column="idescription" jdbcType="VARCHAR" property="idescription" />
     <result column="itime" jdbcType="VARCHAR" property="itime" />
     <result column="iusername" jdbcType="VARCHAR" property="iusername" />
+    <result column="iprice" jdbcType="VARCHAR" property="iprice" />
+    <result column="istate" jdbcType="VARCHAR" property="istate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, ishopname, idescription, itime, iusername
+    id, ishopname, idescription, itime, iusername, iprice, istate
   </sql>
   <select id="selectByExample" parameterType="com.wtc433.domain.InquiryExample" resultMap="BaseResultMap">
     select
@@ -101,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.wtc433.domain.Inquiry">
     insert into inquiry (id, ishopname, idescription, 
-      itime, iusername)
+      itime, iusername, iprice, 
+      istate)
     values (#{id,jdbcType=INTEGER}, #{ishopname,jdbcType=VARCHAR}, #{idescription,jdbcType=VARCHAR}, 
-      #{itime,jdbcType=VARCHAR}, #{iusername,jdbcType=VARCHAR})
+      #{itime,jdbcType=VARCHAR}, #{iusername,jdbcType=VARCHAR}, #{iprice,jdbcType=VARCHAR}, 
+      #{istate,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wtc433.domain.Inquiry">
     insert into inquiry
@@ -123,6 +127,12 @@
       <if test="iusername != null">
         iusername,
       </if>
+      <if test="iprice != null">
+        iprice,
+      </if>
+      <if test="istate != null">
+        istate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -139,6 +149,12 @@
       </if>
       <if test="iusername != null">
         #{iusername,jdbcType=VARCHAR},
+      </if>
+      <if test="iprice != null">
+        #{iprice,jdbcType=VARCHAR},
+      </if>
+      <if test="istate != null">
+        #{istate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +182,12 @@
       <if test="record.iusername != null">
         iusername = #{record.iusername,jdbcType=VARCHAR},
       </if>
+      <if test="record.iprice != null">
+        iprice = #{record.iprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istate != null">
+        istate = #{record.istate,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +199,9 @@
       ishopname = #{record.ishopname,jdbcType=VARCHAR},
       idescription = #{record.idescription,jdbcType=VARCHAR},
       itime = #{record.itime,jdbcType=VARCHAR},
-      iusername = #{record.iusername,jdbcType=VARCHAR}
+      iusername = #{record.iusername,jdbcType=VARCHAR},
+      iprice = #{record.iprice,jdbcType=VARCHAR},
+      istate = #{record.istate,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +221,12 @@
       <if test="iusername != null">
         iusername = #{iusername,jdbcType=VARCHAR},
       </if>
+      <if test="iprice != null">
+        iprice = #{iprice,jdbcType=VARCHAR},
+      </if>
+      <if test="istate != null">
+        istate = #{istate,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -205,13 +235,27 @@
     set ishopname = #{ishopname,jdbcType=VARCHAR},
       idescription = #{idescription,jdbcType=VARCHAR},
       itime = #{itime,jdbcType=VARCHAR},
-      iusername = #{iusername,jdbcType=VARCHAR}
+      iusername = #{iusername,jdbcType=VARCHAR},
+      iprice = #{iprice,jdbcType=VARCHAR},
+      istate = #{istate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
-  <select id="findAll" resultMap="BaseResultMap">
+      <select id="findAll" resultMap="BaseResultMap">
   	select * from inquiry ORDER BY id DESC
   </select>
   
-  
+  <select id="findAllUserAndInquiry" resultType="com.wtc433.domain.InquiryExt">
+  	SELECT user.`name`,user.`username`,
+	user.`iconpath`,inquiry.`ishopname`,inquiry.`iprice`,
+	inquiry.`idescription`,inquiry.`itime`,inquiry.`id`
+	FROM user,inquiry
+	WHERE user.`username` = inquiry.`iusername` 
+  </select>
+    <select id="findAllUserAndInquiryByinquiryId" parameterType="java.lang.Integer"   resultType="com.wtc433.domain.InquiryExt">
+  	SELECT user.`name`,user.`username`,
+	user.`iconpath`,inquiry.`ishopname`,inquiry.`iprice`,
+	inquiry.`idescription`,inquiry.`itime`,inquiry.`id`
+	FROM user,inquiry
+	WHERE user.`username` = inquiry.`iusername` and inquiry.id = #{inquiryid}
+  </select>
 </mapper>

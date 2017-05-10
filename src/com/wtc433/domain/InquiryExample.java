@@ -443,6 +443,146 @@ public class InquiryExample {
             addCriterion("iusername not between", value1, value2, "iusername");
             return (Criteria) this;
         }
+
+        public Criteria andIpriceIsNull() {
+            addCriterion("iprice is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceIsNotNull() {
+            addCriterion("iprice is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceEqualTo(String value) {
+            addCriterion("iprice =", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceNotEqualTo(String value) {
+            addCriterion("iprice <>", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceGreaterThan(String value) {
+            addCriterion("iprice >", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceGreaterThanOrEqualTo(String value) {
+            addCriterion("iprice >=", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceLessThan(String value) {
+            addCriterion("iprice <", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceLessThanOrEqualTo(String value) {
+            addCriterion("iprice <=", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceLike(String value) {
+            addCriterion("iprice like", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceNotLike(String value) {
+            addCriterion("iprice not like", value, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceIn(List<String> values) {
+            addCriterion("iprice in", values, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceNotIn(List<String> values) {
+            addCriterion("iprice not in", values, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceBetween(String value1, String value2) {
+            addCriterion("iprice between", value1, value2, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpriceNotBetween(String value1, String value2) {
+            addCriterion("iprice not between", value1, value2, "iprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateIsNull() {
+            addCriterion("istate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateIsNotNull() {
+            addCriterion("istate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateEqualTo(String value) {
+            addCriterion("istate =", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateNotEqualTo(String value) {
+            addCriterion("istate <>", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateGreaterThan(String value) {
+            addCriterion("istate >", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateGreaterThanOrEqualTo(String value) {
+            addCriterion("istate >=", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateLessThan(String value) {
+            addCriterion("istate <", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateLessThanOrEqualTo(String value) {
+            addCriterion("istate <=", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateLike(String value) {
+            addCriterion("istate like", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateNotLike(String value) {
+            addCriterion("istate not like", value, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateIn(List<String> values) {
+            addCriterion("istate in", values, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateNotIn(List<String> values) {
+            addCriterion("istate not in", values, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateBetween(String value1, String value2) {
+            addCriterion("istate between", value1, value2, "istate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIstateNotBetween(String value1, String value2) {
+            addCriterion("istate not between", value1, value2, "istate");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

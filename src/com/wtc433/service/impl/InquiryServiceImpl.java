@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.wtc433.dao.InquiryMapper;
 import com.wtc433.domain.Inquiry;
+import com.wtc433.domain.InquiryExt;
 import com.wtc433.service.InquiryService;
 
 @Service
@@ -40,6 +41,17 @@ public class InquiryServiceImpl implements InquiryService {
 		Inquiry selectByPrimaryKey = inquiryMapper.selectByPrimaryKey(id);
 		
 		return selectByPrimaryKey;
+	}
+
+	@Override
+	public List<InquiryExt> findAllUserAndInquiry() {
+		return inquiryMapper.findAllUserAndInquiry();
+		
+	}
+
+	@Override
+	public InquiryExt findAllUserAndInquiryByinquiryId(Integer inquiryid) {
+		return	inquiryMapper.findAllUserAndInquiryByinquiryId(inquiryid);
 	}
 
 }

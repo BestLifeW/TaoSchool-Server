@@ -11,6 +11,10 @@ public class Inquiry {
 
     private String iusername;
 
+    private String iprice;
+
+    private String istate;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +53,21 @@ public class Inquiry {
 
     public void setIusername(String iusername) {
         this.iusername = iusername == null ? null : iusername.trim();
+    }
+
+    public String getIprice() {
+        return iprice;
+    }
+
+    public void setIprice(String iprice) {
+        this.iprice = iprice == null ? null : iprice.trim();
+    }
+
+    public String getIstate() {
+        return istate;
+    }
+
+    public void setIstate(String istate) {
+        this.istate = istate == null ? null : istate.trim();
     }
 }

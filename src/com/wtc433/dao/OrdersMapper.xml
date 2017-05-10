@@ -318,6 +318,6 @@
  	from shop,orders,user
  	where shop.id = orders.shopid and shop.username = user.username and orders.`shopid`=#{shopid}
   </select>
-  
+
   
 </mapper>

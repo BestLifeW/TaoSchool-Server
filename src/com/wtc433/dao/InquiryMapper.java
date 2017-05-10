@@ -2,7 +2,7 @@ package com.wtc433.dao;
 
 import com.wtc433.domain.Inquiry;
 import com.wtc433.domain.InquiryExample;
-import com.wtc433.domain.Shop;
+import com.wtc433.domain.InquiryExt;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +31,11 @@ public interface InquiryMapper {
     int updateByPrimaryKey(Inquiry record);
     
     List<Inquiry> findAll();
+
+
+    List<InquiryExt> findAllUserAndInquiry();
+    
+    InquiryExt findAllUserAndInquiryByinquiryId(Integer inquiryid);
+    
+    
 }

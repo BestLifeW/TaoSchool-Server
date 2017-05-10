@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wtc433.domain.Inquiry;
+import com.wtc433.domain.InquiryExt;
 import com.wtc433.service.InquiryService;
 
 @Controller
@@ -30,10 +32,14 @@ public class InquiryController {
 	public String addInquiry(Inquiry inquiry) throws Exception{
 		
 		HashMap<String, String> msg = new HashMap<>();
-		try {
-			inquiryService.insert(inquiry);
-			msg.put("msg", "插入成功");
-		} catch (Exception e) {
+		if (inquiry.getIshopname()!=null) {
+			try {
+				inquiryService.insert(inquiry);
+				msg.put("msg", "插入成功");
+			} catch (Exception e) {
+				msg.put("msg", "插入失败");
+			}
+		}else{
 			msg.put("msg", "插入失败");
 		}
 		return objectMapper.writeValueAsString(msg);
@@ -55,4 +61,26 @@ public class InquiryController {
 		List<Inquiry> all = inquiryService.findAll();
 		return objectMapper.writeValueAsString(all);
 	}
+	
+	
+	@RequestMapping("/getInquiryAndUserByInquiryId/{inquiryid}")
+	@ResponseBody
+	public String getInquiryAndUser (@PathVariable("inquiryid") Integer inquiryid) throws Exception{
+		
+		InquiryExt findAllUserAndInquiryByinquiryId = inquiryService.findAllUserAndInquiryByinquiryId(inquiryid);
+		return objectMapper.writeValueAsString(findAllUserAndInquiryByinquiryId);
+		
+	}
+	
+	
+	
+	@RequestMapping("/getInquiryAndUser.do")
+	@ResponseBody
+	public String getInquiryAndUser () throws Exception{
+		
+		List<InquiryExt> xxx = inquiryService.findAllUserAndInquiry();
+		return objectMapper.writeValueAsString(xxx);
+		
+	}
+	
 }
