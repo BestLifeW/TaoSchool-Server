@@ -11,6 +11,9 @@ WHERE user.`username` = inquiry.`iusername`
 	private String ishopname;
 	private String iprice;
 	private String idescription;
+
+	
+	
 	public int getInquiryid() {
 		return inquiryid;
 	}

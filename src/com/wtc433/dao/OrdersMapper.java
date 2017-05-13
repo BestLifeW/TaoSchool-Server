@@ -38,7 +38,14 @@ public interface OrdersMapper {
     List<OrdersExt> findOrderByUsername(String username);
 
     List<OrdersExt> findOrderBuybuyer(String username);
- 
+    
+    long countSallerByUsername(String username);
 
     OrdersExt findOrdersByshopid(String shopid);
+    
+    List<OrdersExt> findCompleteOrderByUsername(String username);
+    
+    List<OrdersExt> findOrderByCompleteBySaller(String username);
+    
+    List<OrdersExt> findOrderByCompleteByBuyer (String username);
 }

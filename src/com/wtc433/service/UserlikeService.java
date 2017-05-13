@@ -23,4 +23,7 @@ public interface UserlikeService {
     String isHavaLoveShow(Userlike userlike);//只是显示是否赞
     
     long countUserLikeByUsername(String username);
+    
+    
+    //获取 点过赞的 商品id
 }

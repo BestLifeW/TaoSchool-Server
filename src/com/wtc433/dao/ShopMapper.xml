@@ -390,4 +390,24 @@
 		WHERE
 		user.username = shop.username and shop.category = #{category}
 	</select>
+	
+	 <select id="getShopByLikeUsername" parameterType="java.lang.String" resultType="com.wtc433.domain.ShopExt">
+		SELECT user.`name`,
+		user.`username`,
+		user.`college`,
+		user.`iconpath`,
+		shop.`id`,
+		shop.`shopname`,
+		shop.`price`,
+		shop.`picture`,
+		shop.`description`,
+		shop.`shoptime`,
+		shop.`state`
+		FROM shop,userlike,user	
+		WHERE userlike.`shopid` = shop.`id`  AND user.username = shop.username
+		AND userlike.`username` = #{username}	
+	
+	</select>
+	
+	
 </mapper>

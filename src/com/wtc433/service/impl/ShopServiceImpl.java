@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wtc433.dao.ShopMapper;
+import com.wtc433.dao.UserlikeMapper;
 import com.wtc433.domain.Shop;
 import com.wtc433.domain.ShopExt;
 import com.wtc433.domain.SubmitDetail;
@@ -17,7 +18,8 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired
 	private ShopMapper shopmapper;
 	
-	
+	@Autowired
+	private UserlikeMapper userlikemapper;
 	@Override
 	public void insertShop(Shop shop) {
 		// TODO Auto-generated method stub
@@ -40,7 +42,7 @@ public class ShopServiceImpl implements ShopService {
 	public void updateShopById(Shop shop) {
 		// TODO Auto-generated method stub
 		if (shop!=null) {
-			shopmapper.updateByPrimaryKey(shop);
+			shopmapper.updateByPrimaryKeySelective(shop);
 		}
 	}
 
@@ -81,5 +83,12 @@ public class ShopServiceImpl implements ShopService {
 		List<ShopExt> shops = shopmapper.findShopByCategory(category);
 		return shops;
 	}
+
+	@Override
+	public List<ShopExt> findShopBylikeUsername(String username) {
+		
+		return shopmapper.getShopByLikeUsername(username);
+	}
+
 
 }

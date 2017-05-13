@@ -100,4 +100,27 @@ public class OrderServiceImpl  implements OrderService{
 		return findOrdersByshopid;
 	}
 
+	@Override
+	public long countSalleByUsername(String username) {
+		return ordermappers.countSallerByUsername(username);
+	}
+
+	@Override
+	public List<OrdersExt> findCompleteOrderByUsername(String username) {
+		
+		return ordermappers.findCompleteOrderByUsername(username);
+	}
+
+	
+	
+	@Override
+	public List<OrdersExt> findOrderByCompleteBySaller(String username) {
+		return ordermappers.findOrderByCompleteBySaller(username);
+	}
+
+	@Override
+	public List<OrdersExt> findOrderByCompleteByBuyer(String username) {
+		return ordermappers.findOrderByCompleteByBuyer(username);
+	}
+
 }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wtc433.domain.User;
+import com.wtc433.service.OrderService;
 import com.wtc433.service.UserService;
 import com.wtc433.service.UserlikeService;
 
@@ -34,6 +35,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@Autowired
 	private UserlikeService userlikeService;
@@ -74,7 +78,11 @@ public class UserController {
 			userService.updateUserById(user);
 			msg.put("msg", "更新成功");
 		}else {
-			msg.put("msg", "请输入内容");
+			User old = userService.findUserByName(user.getUsername());
+			Integer id = old.getId();
+			user.setId(id);
+			userService.updateUserById(user);
+			msg.put("msg", "更新成功");
 		}
 		return objectMapper.writeValueAsString(msg);
 		
@@ -87,8 +95,19 @@ public class UserController {
 		
 		HashMap<String, String> msg= new HashMap<>();
 		try {
-			int updateUserById = userService.updateUserById(user);
-			msg.put("msg", updateUserById+"");
+			if (user.getId()!=null) {
+				int updateUserById = userService.updateUserById(user);
+				msg.put("msg", updateUserById+"");
+				msg.put("msg", "更新成功");
+			}else {
+				User old = userService.findUserByName(user.getUsername());
+				Integer id = old.getId();
+				user.setId(id);
+				userService.updateUserById(user);
+				msg.put("msg", "更新成功");
+			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -172,7 +191,10 @@ public class UserController {
 		User databaseuser = userService.findUserByName(username);
 		int countShopPubils = userService.CountShopPublish(username);
 		long countUserLikeByUsername = userlikeService.countUserLikeByUsername(username);
+		//获取卖出去的统计
 		databaseuser.setLikecount((int) countUserLikeByUsername);
+		long countSalleByUsername = orderService.countSalleByUsername(username);
+		databaseuser.setInquirycount((int)countSalleByUsername);
 		databaseuser.setPublishcount(countShopPubils);
 		return objectMapper.writeValueAsString(databaseuser);
 		

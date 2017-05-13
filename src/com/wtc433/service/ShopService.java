@@ -33,6 +33,6 @@ public interface ShopService {
 
 	List<ShopExt> findShopByCategory(String category);
 
-
+	List<ShopExt> findShopBylikeUsername(String username);
 	
 }

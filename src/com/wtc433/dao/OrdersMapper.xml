@@ -318,6 +318,49 @@
  	from shop,orders,user
  	where shop.id = orders.shopid and shop.username = user.username and orders.`shopid`=#{shopid}
   </select>
-
-  
+	<select id="countSallerByUsername" parameterType="java.lang.String" resultType="java.lang.Long">
+		SELECT COUNT(*) FROM orders WHERE sellerusername = #{username} AND state ='交易完成'
+	</select>
+	<select id="findOrderByCompleteBySaller" parameterType="java.lang.String" resultType="com.wtc433.domain.OrdersExt">
+		SELECT shop.id AS shopid,shop.price,
+	  		user.name,
+			user.iconpath,
+	        user.telephone,
+	        user.college,
+	        user.dormitory,
+	        user.floor
+			,shop.shopname
+	        ,shop.state AS shopstate
+	        ,shop.username,
+	        orders.id AS orderid,
+	        orders.buyerusername,
+	        orders.sellerusername,
+	        orders.time,
+	        orders.state AS ordersstate,
+	        shop.picture
+ 		FROM shop,orders,USER
+ 		WHERE shop.id = orders.shopid AND shop.username = user.username AND orders.`sellerusername` = #{username} AND orders.`state` ='交易完成'
+	</select>
+	
+		<select id="findOrderByCompleteByBuyer" parameterType="java.lang.String" resultType="com.wtc433.domain.OrdersExt">
+		SELECT shop.id AS shopid,shop.price,
+	  		user.name,
+			user.iconpath,
+	        user.telephone,
+	        user.college,
+	        user.dormitory,
+	        user.floor
+			,shop.shopname
+	        ,shop.state AS shopstate
+	        ,shop.username,
+	        orders.id AS orderid,
+	        orders.buyerusername,
+	        orders.sellerusername,
+	        orders.time,
+	        orders.state AS ordersstate,
+	        shop.picture
+ 		FROM shop,orders,USER
+ 		WHERE shop.id = orders.shopid AND shop.username = user.username AND orders.`buyerusername` = #{username} AND orders.`state` ='交易完成'
+	</select>
+   
 </mapper>

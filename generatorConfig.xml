@@ -28,6 +28,6 @@
     <table  tableName="user" ></table>
      <table  tableName="orders" ></table>
      <table tableName="comment"></table> -->
-<table  tableName="inquiry" ></table>
+<table  tableName="inquirycomment" ></table>
   </context>
 </generatorConfiguration>

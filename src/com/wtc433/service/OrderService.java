@@ -39,4 +39,12 @@ public interface OrderService {
 
 	OrdersExt findOrdersByshopid(String shopid);
 	
+    List<OrdersExt> findCompleteOrderByUsername(String username);
+	
+	long countSalleByUsername(String username);
+	
+	
+	  List<OrdersExt> findOrderByCompleteBySaller(String username); //我卖出的
+	    
+	   List<OrdersExt> findOrderByCompleteByBuyer (String username);//我买到的
 }

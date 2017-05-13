@@ -245,17 +245,17 @@
   </select>
   
   <select id="findAllUserAndInquiry" resultType="com.wtc433.domain.InquiryExt">
-  	SELECT user.`name`,user.`username`,
+  	SELECT user.`name`,user.`username`,user.`college`,
 	user.`iconpath`,inquiry.`ishopname`,inquiry.`iprice`,
 	inquiry.`idescription`,inquiry.`itime`,inquiry.`id`
 	FROM user,inquiry
 	WHERE user.`username` = inquiry.`iusername` 
   </select>
     <select id="findAllUserAndInquiryByinquiryId" parameterType="java.lang.Integer"   resultType="com.wtc433.domain.InquiryExt">
-  	SELECT user.`name`,user.`username`,
+    	SELECT user.`name`,user.`username`,user.`college`,user.telephone,
 	user.`iconpath`,inquiry.`ishopname`,inquiry.`iprice`,
-	inquiry.`idescription`,inquiry.`itime`,inquiry.`id`
+	inquiry.`idescription`,inquiry.`itime`,inquiry.`id` AS inquiryid
 	FROM user,inquiry
-	WHERE user.`username` = inquiry.`iusername` and inquiry.id = #{inquiryid}
+	WHERE user.`username` = inquiry.`iusername` AND inquiry.id = #{inquiryid}
   </select>
 </mapper>

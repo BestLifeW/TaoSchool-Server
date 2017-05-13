@@ -44,5 +44,5 @@ public interface ShopMapper {
 
 	List<ShopExt> findShopByCategory(String category);
     
-    
+	List<ShopExt> getShopByLikeUsername(String username);
 }

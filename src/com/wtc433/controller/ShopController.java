@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wtc433.domain.OrdersExt;
 import com.wtc433.domain.Shop;
 import com.wtc433.domain.ShopExt;
 import com.wtc433.domain.SubmitDetail;
@@ -83,6 +84,7 @@ public class ShopController {
 	@RequestMapping("/allShopAndUser.do")
 	public String getallShopAndUser() throws Exception {
 		List<ShopExt> allShopAndUser = shopservice.findShopAndUser();
+		
 		return objectMapper.writeValueAsString(allShopAndUser);
 	}
 
@@ -162,4 +164,13 @@ public class ShopController {
 		}
 		return objectMapper.writeValueAsString(shopExts);
 	}
+	
+	//根据用户点赞获得商品数据
+	@ResponseBody
+	@RequestMapping("/getShopsByLikeUsername/{username}")
+	public String getShopsBylike(@PathVariable("username") String username) throws Exception{
+		List<ShopExt> shopExts = shopservice.findShopBylikeUsername(username);
+		return objectMapper.writeValueAsString(shopExts);
+	}
+
 }
